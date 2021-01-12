@@ -12,12 +12,12 @@ namespace smms_uploader
     {
         public static (bool, string) UploadSmms(string file)
         {
-            var client = new RestClient("https://sm.ms") { Timeout = -1 };
+            var client = new RestClient("https://sm.ms") { Timeout = 10000 };
             var resp = client.Execute(new RestRequest(), Method.GET);
             var request = new RestRequest("api/v2/upload?inajax=1", Method.POST);
+            // request.AddHeader("cookie", "PHPSESSID=tsitoe2aoo7t4ettf6ant3ln16; SM_FC=hSIGWqEQEkD4gutgpGzNGo43nUr97uKNODuyUQbsKe6P; _pk_ref.2.dae2=%5B%22%22%2C%22%22%2C1609136616%2C%22https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fsm.ms%2F%22%5D; _pk_id.2.dae2=80aaff6274f52275.1604134690.; _pk_ses.2.dae2=1; gznotes-visited=true");
             var cookies = resp.Cookies.Select(c => $"{c.Name}={c.Value}");
             request.AddHeader("cookie", string.Join("; ", cookies));
-            // request.AddHeader("cookie", "PHPSESSID=tsitoe2aoo7t4ettf6ant3ln16; SM_FC=hSIGWqEQEkD4gutgpGzNGo43nUr97uKNODuyUQbsKe6P; _pk_ref.2.dae2=%5B%22%22%2C%22%22%2C1609136616%2C%22https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fsm.ms%2F%22%5D; _pk_id.2.dae2=80aaff6274f52275.1604134690.; _pk_ses.2.dae2=1; gznotes-visited=true");
             // request.AddFile("smfile", @"C:/Users/Qing/Desktop/1bc2d4ee89b59f4abad37c8f113753d5.png");
             request.AddFile("smfile", file);
             request.AddParameter("file_id", "0");
