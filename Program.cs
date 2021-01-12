@@ -8,7 +8,7 @@ namespace smms_uploader
     {
         static void Main(string[] args)
         {
-#if !DEBUG
+#if DEBUG
             var file = @"C:/Users/Qing/Desktop/1bc2d4ee89b59f4abad37c8f113753d5.png";
 #else
             if (!args.Any())

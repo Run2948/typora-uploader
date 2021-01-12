@@ -19,13 +19,13 @@ dotnet tool install -g smms-uploader
 
 **English Language**
 
-![en-US](./docs/en-US.png)
+![en-US.png](https://i.loli.net/2021/01/12/lBPxROwvD3S5ejW.png)
 
 ---
 
 **Chinese Language**
 
-![zh-CN](./docs/zh-CN.png)
+![zh-CN.png](https://i.loli.net/2021/01/12/2Vak3hcWSOGo5N7.png)
 
 ---
 ## Usage

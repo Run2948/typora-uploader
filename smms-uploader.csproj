@@ -9,16 +9,17 @@
     <AssemblyName>smms-uploader</AssemblyName>
     <RootNamespace>smms_uploader</RootNamespace>
     <PackAsTool>true</PackAsTool>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Copyright>Copyright © Run2948</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Run2948/typora-smms-uploader.git</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/Run2948/typora-smms-uploader.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed the issue of image upload in Release mode</PackageReleaseNotes>
     <PackageTags>Image-Uploader SM.MS Typora Markdown Editor .NETCore</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
