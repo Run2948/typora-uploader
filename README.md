@@ -19,13 +19,13 @@ dotnet tool install -g smms-uploader
 
 **English Language**
 
-![en-US.png](https://i.loli.net/2021/01/12/lBPxROwvD3S5ejW.png)
+![en-US.png](https://raw.githubusercontent.com/Run2948/typora-smms-uploader/master/docs/en-US.png)
 
 ---
 
 **Chinese Language**
 
-![zh-CN.png](https://i.loli.net/2021/01/12/2Vak3hcWSOGo5N7.png)
+![zh-CN.png](https://raw.githubusercontent.com/Run2948/typora-smms-uploader/master/docs/zh-CN.png)
 
 ---
 ## Usage
