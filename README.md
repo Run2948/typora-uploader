@@ -89,7 +89,7 @@ Open the path:  `explorer "%AppData%\Typora\conf"`
 
 **English Language**
 
-![en-US.png](https://raw.githubusercontent.com/Run2948/typor-uploader/master/docs/en-US-2.png)
+![en-US.png](https://raw.githubusercontent.com/Run2948/typora-uploader/master/docs/en-US-2.png)
 
 ---
 
