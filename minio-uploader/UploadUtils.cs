@@ -1,4 +1,5 @@
-﻿using Minio;
+﻿using Microsoft.AspNetCore.StaticFiles;
+using Minio;
 using Minio.Exceptions;
 using System;
 using System.IO;
@@ -25,7 +26,7 @@ namespace minio_uploader
                 objectName = PathFormat(objectName, config.pathFormat);
 
                 // Upload a file to bucket.
-                await client.PutObjectAsync(config.bucketName, objectName, file);
+                await client.PutObjectAsync(config.bucketName, objectName, file, ParseContentType(file));
                 return (true, $"http{(config.withSSL ? "s" : "")}://{config.endpoint}/{config.bucketName}/{objectName}");
             }
             catch (MinioException e)
@@ -70,6 +71,13 @@ namespace minio_uploader
             pathFormat = pathFormat.Replace("{ss}", DateTime.Now.Second.ToString("D2"));
 
             return pathFormat + extension;
+        }
+
+        public static string ParseContentType(string file)
+        {
+            var provider = new FileExtensionContentTypeProvider();
+            provider.TryGetContentType(file, out var contentType);
+            return contentType;
         }
     }
 }
