@@ -12,9 +12,9 @@
     <Version>1.0.2</Version>
     <Copyright>Copyright © Run2948</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/Run2948/typora-smms-uploader.git</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Run2948/typora-uploader.git</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Run2948/typora-smms-uploader.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Run2948/typora-uploader.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Add random user-agent to improve upload stability</PackageReleaseNotes>
     <PackageTags>Image-Uploader SM.MS Typora Markdown Editor .NETCore</PackageTags>
@@ -28,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="icon.png">
+    <None Include="../icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="LICENSE">
+    <None Include="../LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

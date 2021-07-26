@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "smms-uploader", "smms-uploader\smms-uploader.csproj", "{43D653D2-95FF-4CB2-B5A3-3E190FB09190}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "minio-uploader", "minio-uploader\minio-uploader.csproj", "{278FAF99-BCC3-4AC4-9B59-926D9C739735}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43D653D2-95FF-4CB2-B5A3-3E190FB09190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D653D2-95FF-4CB2-B5A3-3E190FB09190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D653D2-95FF-4CB2-B5A3-3E190FB09190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D653D2-95FF-4CB2-B5A3-3E190FB09190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278FAF99-BCC3-4AC4-9B59-926D9C739735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278FAF99-BCC3-4AC4-9B59-926D9C739735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278FAF99-BCC3-4AC4-9B59-926D9C739735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278FAF99-BCC3-4AC4-9B59-926D9C739735}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F5E55A6-C0BD-4BA7-ACFA-52D820D02266}
+	EndGlobalSection
+EndGlobal
