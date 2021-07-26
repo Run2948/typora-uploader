@@ -5,11 +5,12 @@
     <VersionPrefix>1.0.0</VersionPrefix>
     <Authors>Run2948</Authors>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
     <AssemblyName>smms-uploader</AssemblyName>
     <RootNamespace>smms_uploader</RootNamespace>
     <PackAsTool>true</PackAsTool>
-    <Version>1.0.2</Version>
+		<!--<ToolCommandName>sud</ToolCommandName>-->
+    <Version>1.0.3</Version>
     <Copyright>Copyright © Run2948</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Run2948/typora-uploader.git</PackageProjectUrl>
@@ -23,8 +24,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
 
   <ItemGroup>
