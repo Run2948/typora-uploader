@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.StaticFiles;
-using Minio;
+﻿using Minio;
 using Minio.Exceptions;
 using System;
 using System.IO;

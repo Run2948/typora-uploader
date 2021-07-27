@@ -52,6 +52,9 @@ The Lightweight MinIO Image Uploader of Typora Editor for .NET Core.
 
 ```bash
 dotnet tool install -g minio-uploader
+
+# Get help
+minio-uploader -h | --help
 ```
 
 ---

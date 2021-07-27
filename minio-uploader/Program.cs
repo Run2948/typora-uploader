@@ -2,7 +2,9 @@
 using Minio;
 using System;
 using System.IO;
+#if !DEBUG
 using System.Linq;
+#endif
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -18,6 +20,8 @@ namespace minio_uploader
             var basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Typora", @"conf");
             if (!File.Exists(Path.Combine(basePath, "conf.uploader.json")))
             {
+                if (!Directory.Exists(basePath))
+                    Directory.CreateDirectory(basePath);
                 await File.WriteAllTextAsync(Path.Combine(basePath, "conf.uploader.json"), JsonSerializer.Serialize(UploaderConfig.InitMinio(), new JsonSerializerOptions()
                 {
                     WriteIndented = true
@@ -34,6 +38,17 @@ namespace minio_uploader
             }
 
             var file = args.FirstOrDefault();
+
+            if (
+                "-h" == file ||
+                "--help" == file
+                )
+            {
+                Console.WriteLine("Open config directory in file explorer: ");
+                Console.WriteLine("\texplorer \"%AppData%\\Typora\\conf\\\"");
+                return;
+            }
+
             if (!File.Exists(file))
             {
                 Console.WriteLine("Upload Interrupted: ");
@@ -44,9 +59,13 @@ namespace minio_uploader
             try
             {
                 var builder = new ConfigurationBuilder();
-                builder.AddJsonFile(Path.Combine(basePath, "conf.uploader.json"), false, true);
+                builder
+                    .SetBasePath(basePath)
+                    .AddJsonFile("conf.uploader.json", false, true);
                 var configRoot = builder.Build();
-                var config = configRoot.GetSection("minio-uploader").Get<MinioConfig>();
+                //var config = configRoot.Get<UploaderConfig>();
+                var minioConfig = configRoot.GetSection("minio-uploader").Get<MinioConfig>();
+                //var withSSL = configRoot.GetSection("minio-uploader:withSSL").Get<bool>();
 #if DEBUG
                 Console.WriteLine("\n********************* MinIO Config *********************\n");
                 Console.WriteLine($"\tendpoint: {config.endpoint}");
@@ -57,12 +76,12 @@ namespace minio_uploader
                 Console.WriteLine($"\tpathFormat: {config.pathFormat}");
                 Console.WriteLine("\n*********************************************************\n");
 #endif
-                var minio = new MinioClient(config.endpoint, config.accessKey, config.accessKey);
-                if (config.withSSL) minio = minio.WithSSL();
+                var minio = new MinioClient(minioConfig.endpoint, minioConfig.accessKey, minioConfig.accessKey);
+                if (minioConfig.withSSL) minio = minio.WithSSL();
 #if DEBUG
                 minio.SetTraceOn();
 #endif
-                var (success, result) = await UploadUtils.UploadMinio(minio, config, file);
+                var (success, result) = await UploadUtils.UploadMinio(minio, minioConfig, file);
                 Console.WriteLine($"Upload {(success ? "Success" : "Error")}: ");
                 Console.WriteLine(result);
             }
