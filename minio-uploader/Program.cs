@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Minio;
+﻿using Minio;
 using System;
 using System.IO;
 #if !DEBUG
@@ -58,22 +57,21 @@ namespace minio_uploader
 #endif
             try
             {
-                var builder = new ConfigurationBuilder();
+                var builder = new JsonFileConfigurationBinder();
                 builder
                     .SetBasePath(basePath)
-                    .AddJsonFile("conf.uploader.json", false, true);
-                var configRoot = builder.Build();
-                //var config = configRoot.Get<UploaderConfig>();
-                var minioConfig = configRoot.GetSection("minio-uploader").Get<MinioConfig>();
-                //var withSSL = configRoot.GetSection("minio-uploader:withSSL").Get<bool>();
+                    .AddJsonFile("conf.uploader.json");
+                var config = builder.Build();
+                var minioConfig = config.MinioConfig;
+                //var withSSL = config.MinioConfig.withSSL;
 #if DEBUG
                 Console.WriteLine("\n********************* MinIO Config *********************\n");
-                Console.WriteLine($"\tendpoint: {config.endpoint}");
-                Console.WriteLine($"\taccessKey: {config.accessKey}");
-                Console.WriteLine($"\tsecretKey: {config.secretKey}");
-                Console.WriteLine($"\twithSSL: {config.withSSL}");
-                Console.WriteLine($"\tbucketName: {config.bucketName}");
-                Console.WriteLine($"\tpathFormat: {config.pathFormat}");
+                Console.WriteLine($"\tendpoint: {minioConfig.endpoint}");
+                Console.WriteLine($"\taccessKey: {minioConfig.accessKey}");
+                Console.WriteLine($"\tsecretKey: {minioConfig.secretKey}");
+                Console.WriteLine($"\twithSSL: {minioConfig.withSSL}");
+                Console.WriteLine($"\tbucketName: {minioConfig.bucketName}");
+                Console.WriteLine($"\tpathFormat: {minioConfig.pathFormat}");
                 Console.WriteLine("\n*********************************************************\n");
 #endif
                 var minio = new MinioClient(minioConfig.endpoint, minioConfig.accessKey, minioConfig.accessKey);

@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,32 +12,31 @@ namespace minio_uploader
     /// <summary>
     /// 参考：如何将IConfigurationRoot或IConfigurationSection转换为JObject/JSON https://www.it1352.com/2188682.html
     /// </summary>
-    public static class JsonFileConfigurationBinder
+    public class JsonFileConfigurationBinder
     {
-        public static T Get<T>(this IConfiguration configuration)
+        private string _basePath;
+        private string _fileName;
+
+        public JsonFileConfigurationBinder SetBasePath(string basePath)
         {
-            if (!configuration.GetChildren().Any() && configuration is IConfigurationSection section)
-                return (T)Convert.ChangeType(section.Value, typeof(T), CultureInfo.InvariantCulture);
+            _basePath = basePath;
+            return this;
+        }
 
-            var dict = new Dictionary<string, object>();
+        public JsonFileConfigurationBinder AddJsonFile(string fileName)
+        {
+            _fileName = fileName;
+            return this;
+        }
 
-            foreach (var child in configuration.GetChildren())
-            {
-                if (!child.GetChildren().Any() && child is IConfigurationSection childSection)
-                {
-                    dict.Add(child.Key, childSection.Value);
-                }
-                else
-                {
-                    dict.Add(child.Key, Get<object>(child));
-                }
-            }
-
+        public UploaderConfig Build()
+        {
             var options = new JsonSerializerOptions();
             options.Converters.Add(new BooleanConverter());
-
-            var result = JsonSerializer.Serialize(dict);
-            return JsonSerializer.Deserialize<T>(result, options);
+            options.ReadCommentHandling = JsonCommentHandling.Skip;
+            options.AllowTrailingCommas = true;
+            var content = File.ReadAllText(Path.Combine(_basePath, _fileName), Encoding.Default);
+            return JsonSerializer.Deserialize<UploaderConfig>(content, options);
         }
     }
 
@@ -47,7 +47,9 @@ namespace minio_uploader
     {
         public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return bool.Parse(reader.GetString() ?? "False");
+            if (reader.TokenType == JsonTokenType.False) return false;
+            if (reader.TokenType == JsonTokenType.True) return true;
+            return Convert.ToBoolean(reader.GetString());
         }
 
         public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
